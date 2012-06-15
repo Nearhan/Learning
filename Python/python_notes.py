@@ -34,3 +34,13 @@ random.shuffle():
         >>> ['h','e','l','l','o']
     >>>random.shuffle(y)
         >>> ['e','l','o','h','l']
+    
+
+
+os module:
+    How to create a direcotry in python:
+
+        if not os.path.exsist.(path):
+            os.makedirs(path)
+
+        
