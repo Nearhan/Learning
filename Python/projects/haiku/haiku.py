@@ -93,7 +93,7 @@ ADDITIVES = {'5':[list('11111'), list('1112'), list('23'), list('113'), list('14
 cleaned_word_bank = list()
 clean_string = "().,?!|"
 sylb = create_syallables_dict(7)
-re_pattern = '[0-9]|-|:|;|\'|\"'
+re_pattern = '[0-9]|-|:|;|\'|\"|&'
 
 
 #start function chain
