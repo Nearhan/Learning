@@ -1,7 +1,7 @@
 #First Attempt in gather response from hacker news
 
 
-import json, urllib2, sys
+import json, urllib2, sys, re
 
 #Define Functions
 
@@ -26,21 +26,27 @@ def hacker_news_fetch():
 def hacker_news_process_response(response):
     """Creats a list of words from all the titles of hacker news articles
     """
-    global raw_word_bank
+    global clean_word_bank
     global clean_string
+    global re_pattern
     
     #iterate over items then titles and split all the words to 
     items = response['items']
     for article in items:
         for title in article['title'].split():
             striped_word = title.strip(clean_string)
-            encoded_word = striped_word.encode('ascii', 'ignore')
-            raw_word_bank.append(encoded_word)
-
+            """Adding more cleaning up to words"""
+            match = re.search(re_pattern, striped_word)
+            if not match:
+                encoded_word = striped_word.encode('ascii', 'ignore')
+                cleaned_word_bank.append(encoded_word)
+            else:
+                continue
 
 def rhyme_brain_fetch(word):
     """Makes api call to rhyme brain
     """
+    print 'This is the current word '+word
     rhyme_brain_api_url = 'http://rhymebrain.com/talk?function=getWordInfo&word='+word
     response = json.load(urllib2.urlopen(rhyme_brain_api_url))
     rhyme_brain_process_response(response)
@@ -53,26 +59,73 @@ def rhyme_brain_process_response(response):
     sylb[response['syllables']].append(response['word'])
     
 
+def shuffle_pop_additive(additive):
+    """Shuffle through the additives and pop a random one to pass to another function
+    """
+    shuffle(additive)
+
+    line = shuffle_pop_word(additive)
+    return line 
+
+def shuffle_pop_word(additive):
+    """Iterate over additives, pop word into array
+    """
+    global sylb
+
+    line = []
+    popped_additive = additive.pop()
+
+    for x in popped_additive:
+        if sylb[x]:
+            break 
+
+
+
+#CONSTANTS
+"""
+ADDITIVES = {'5':[list('11111'), list('1112'), list('23'), list('113'), list('14'), list('5')],
+'7':[list('62'), list('52'), list('511'), list('43'), list('421'), list('4111'), list('331'), list('322'), list('31111'), list('2221')]}
+"""
 
 #define global vars
 
-raw_word_bank = list()
-clean_string = "().,?!"
-sylb = create_syallables_dict(6)
 
+cleaned_word_bank = list()
+clean_string = "().,?!|"
+sylb = create_syallables_dict(7)
+re_pattern = '[0-9]|-|:|;|\'|\"'
 
 
 #start function chain
 
 hacker_news_fetch()
 
-print raw_word_bank
+print cleaned_word_bank
 
-
-for word in raw_word_bank:
+#starts chain 
+for word in cleaned_word_bank:
     rhyme_brain_fetch(word)
 
 print sylb
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
