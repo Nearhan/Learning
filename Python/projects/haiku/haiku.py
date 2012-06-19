@@ -2,6 +2,7 @@
 
 
 import json, urllib2, sys, re
+from random import shuffle
 
 #Define Functions
 
@@ -46,7 +47,6 @@ def hacker_news_process_response(response):
 def rhyme_brain_fetch(word):
     """Makes api call to rhyme brain
     """
-    print 'This is the current word '+word
     rhyme_brain_api_url = 'http://rhymebrain.com/talk?function=getWordInfo&word='+word
     response = json.load(urllib2.urlopen(rhyme_brain_api_url))
     rhyme_brain_process_response(response)
@@ -80,12 +80,49 @@ def shuffle_pop_word(additive):
             break 
 
 
+def build_line(additive):
+    print additive
+    shuffle(additive)
+    popped_additive = additive.pop()
+    print popped_additive
+    line = build_words(popped_additive)
+    return line
+
+
+
+def build_words(popped_additive):
+    global sylb
+    line = []
+    shuffle(popped_additive)
+    for key in popped_additive:
+        print key
+        str_key = str(key)
+        print str_key
+        shuffle(sylb[str_key])
+        word = sylb[str_key].pop()
+        print word
+        line.append(word)
+        print line
+
+    line.append('\n')
+    print line
+    return line
+
+def build_haiku(line1, line2, line3):
+
+    #let's add all lines together
+    haiku_list = line1 + line2 + line3
+    haiku = ''
+    for word in haiku_list:
+        haiku += word + ' '
+    return haiku
+
+
 
 #CONSTANTS
-"""
-ADDITIVES = {'5':[list('11111'), list('1112'), list('23'), list('113'), list('14'), list('5')],
-'7':[list('62'), list('52'), list('511'), list('43'), list('421'), list('4111'), list('331'), list('322'), list('31111'), list('2221')]}
-"""
+
+ADDITIVES = {'5':[list('11111'), list('1112'), list('23'), list('113'), list('14'), list('5')], '7':[list('61'), list('52'), list('511'), list('43'), list('421'), list('4111'), list('331'), list('322'), list('31111'), list('2221')]}
+
 
 #define global vars
 
@@ -108,7 +145,17 @@ for word in cleaned_word_bank:
 
 print sylb
 
+line1 = build_line(ADDITIVES['5'])
+line2 = build_line(ADDITIVES['7'])
+line3 = build_line(ADDITIVES['5'])
 
+print line1
+print line2
+print line3
+
+haiku = build_haiku(line1, line2, line3)
+
+print haiku
 
 
 
