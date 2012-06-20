@@ -82,10 +82,9 @@ def shuffle_pop_word(additive):
 
 
 #CONSTANTS
-"""
 ADDITIVES = {'5':[list('11111'), list('1112'), list('23'), list('113'), list('14'), list('5')],
 '7':[list('62'), list('52'), list('511'), list('43'), list('421'), list('4111'), list('331'), list('322'), list('31111'), list('2221')]}
-"""
+
 
 #define global vars
 
