@@ -47,6 +47,7 @@ def hacker_news_process_response(response):
 def rhyme_brain_fetch(word):
     """Makes api call to rhyme brain
     """
+    print 'This is the current word ' +word
     rhyme_brain_api_url = 'http://rhymebrain.com/talk?function=getWordInfo&word='+word
     response = json.load(urllib2.urlopen(rhyme_brain_api_url))
     rhyme_brain_process_response(response)
@@ -81,6 +82,7 @@ def shuffle_pop_word(additive):
 
 
 def build_line(additive):
+    """Builds a line by shuffling an additive"""
     print additive
     shuffle(additive)
     popped_additive = additive.pop()
@@ -91,9 +93,11 @@ def build_line(additive):
 
 
 def build_words(popped_additive):
+    """Builds the words of a single line"""
     global sylb
     line = []
     shuffle(popped_additive)
+
     for key in popped_additive:
         print key
         str_key = str(key)
@@ -133,7 +137,7 @@ sylb = create_syallables_dict(7)
 re_pattern = '[0-9]|-|:|;|\'|\"|&'
 
 
-#start function chain
+#Start Script 
 
 hacker_news_fetch()
 
@@ -176,42 +180,42 @@ print haiku
 
 
 
-"""
-Test Works!
-ten_words = raw_word_bank[:10]
-print ten_words
-
-for word in ten_words:
-    rhyme_brain_fetch(word)
 
 
-print sylb
-"""
 
 
-"""
-# make connection and pull response 
-response = json.load(urllib2.urlopen(hacker_news_url))
-
-# iterate over response and split title strings into word bank         
-items = response['items']
-for x in items:
-    for y in x['title'].split():
-        #append to word bank
-        #add clean string here
-        wb.append(y.strip(clean_string))
-
-print wb
-print len(wb)
-# send requests to rhyme brain and constructs syllable dict
-
-for x in wb:
-    rbr = json.load(urllib2.urlopen(rhyme_brain_api+x))
-    sylb[rbr['syllables']].append(rbr['word'])
 
 
-print sylb
-"""
+
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

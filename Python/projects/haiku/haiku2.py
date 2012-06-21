@@ -3,4 +3,12 @@
 
 
 
-class 
+class Haiku()
+
+class SyllablesDictionary()
+
+class HackerNewsResponse()
+
+class RhymeBrainResponse()
+
+
