@@ -1,0 +1,29 @@
+Javascript Functions
+
+
+###
+
+Window Object:
+
+setTimeout(func, delay)
+	-sets up function on a timer!
+
+
+Regular Expressions
+	-Two ways to define
+		1) var x = new RegExp(pattern, modifiers);
+		2) var x = /pattern/moddifers
+		important modifiers =  g : find all matches rather than stopping after the first match
+				       m: performs multi-matching
+				       i: Perform -case-insenitive-matching
+
+Methods:
+	str.replace(pattern, '')
+					
+
+
+filter = returns called on Array Ojbects, can call a function to return a filter array
+	arr = [1,2,,,,4,,,6,,8,,,9,,0,,3]
+	arr.filter(function(){ return true});
+	//[1,2,3,4,6,,8,9,0]
+	`
