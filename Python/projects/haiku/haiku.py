@@ -48,7 +48,7 @@ def hacker_news_process_response(response):
 def rhyme_brain_fetch(word):
     """Makes api call to rhyme brain
     """
-    #print 'The current word is ' +word
+    print 'This is the current word ' +word
     rhyme_brain_api_url = 'http://rhymebrain.com/talk?function=getWordInfo&word='+word
     response = json.load(urllib2.urlopen(rhyme_brain_api_url))
     rhyme_brain_process_response(response)
@@ -83,7 +83,8 @@ def shuffle_pop_word(additive):
 
 
 def build_line(additive):
-    #print additive
+    """Builds a line by shuffling an additive"""
+    print additive
     shuffle(additive)
     popped_additive = additive.pop()
     #print popped_additive
@@ -93,9 +94,11 @@ def build_line(additive):
 
 
 def build_words(popped_additive):
+    """Builds the words of a single line"""
     global sylb
     line = []
     shuffle(popped_additive)
+
     for key in popped_additive:
         #print key
         str_key = str(key)
@@ -135,7 +138,7 @@ sylb = create_syallables_dict(7)
 re_pattern = '[0-9]|-|:|;|\'|\"|&'
 
 
-#start function chain
+#Start Script 
 
 while hacker_news_fetch() == urllib2.HTTPError:
 
