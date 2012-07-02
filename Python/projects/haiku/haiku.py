@@ -140,21 +140,7 @@ re_pattern = '[0-9]|-|:|;|\'|\"|&'
 
 #Start Script 
 
-while hacker_news_fetch() == urllib2.HTTPError:
-
-
-
-for item in range(10):
-    try:
-        hacker_news_fetch()
-    except urllib2.HTTPError:
-        while True:
-            try:
-                hacker_news_fetch()
-            except urllib2.HTTPError:
-                continue
-            else:
-                break
+hacker_news_fetch() 
 
 print cleaned_word_bank
 
